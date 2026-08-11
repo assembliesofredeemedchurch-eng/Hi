@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pull — grab a video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="tape-edge" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="head">
+    <div class="mark">
+      <span class="dot" id="statusDot" aria-hidden="true"></span>
+      <span class="mark-text">pull</span>
+    </div>
+    <p class="tagline">paste a link. get the file.</p>
+  </header>
+
+  <section class="deck">
+    <form id="pullForm" class="pull-form" autocomplete="off">
+      <label for="url" class="sr-only">Video URL</label>
+      <input
+        id="url"
+        name="url"
+        type="text"
+        placeholder="https://…"
+        inputmode="url"
+        spellcheck="false"
+        required
+      />
+      <div class="mode-row">
+        <div class="mode-toggle" role="radiogroup" aria-label="Download mode">
+          <button type="button" class="mode-btn active" data-mode="video" role="radio" aria-checked="true">video</button>
+          <button type="button" class="mode-btn" data-mode="audio" role="radio" aria-checked="false">audio only</button>
+        </div>
+        <button type="submit" class="go-btn" id="goBtn">pull</button>
+      </div>
+    </form>
+
+    <div class="log" id="log" aria-live="polite">
+      <p class="log-line log-hint">$ waiting for a URL —</p>
+    </div>
+
+    <div class="result" id="result" hidden>
+      <img id="thumb" alt="" />
+      <div class="result-meta">
+        <p class="result-title" id="resultTitle"></p>
+        <p class="result-sub" id="resultSub"></p>
+        <a id="downloadLink" class="download-link" download>
+          <span>save file</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>Only pull things you have the right to download. Built on <a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener">yt-dlp</a>.</p>
+  </footer>
+</main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
